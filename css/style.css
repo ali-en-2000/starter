@@ -1,0 +1,245 @@
+@font-face {
+    font-family: Vazir;
+    src: url('../font/Vazir.woff2') format('woff2');
+    font-weight: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: Vazir
+}
+
+li,
+a {
+    list-style: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* sidebar styel  */
+.right-side {
+    background-color: rgb(255, 255, 255);
+    width: 270px;
+    height: 100vh;
+    z-index: 10;
+    transition: all 200ms ease;
+}
+
+.right-side.is-active {
+    right: -150px;
+    width: 90px;
+    transition: all 200ms ease;
+    text-align: center;
+}
+
+.right-side.is-active .page-link span,
+.right-side.is-active .user-info {
+    display: none;
+}
+
+.user>* {
+    display: flex;
+    margin: 0 auto;
+}
+
+.right-side .img {
+    width: 55%;
+    border-radius: 20%;
+    margin-top: 10%;
+}
+
+.right-side .user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.right-side .user-info>* {
+    width: 100%;
+}
+
+.right-side .user-info p:first-child {
+    margin-bottom: 0;
+    font-weight: 900;
+    font-size: 1.3em;
+}
+
+
+/* page links stlye */
+.page-link {
+    display: flex;
+    width: 90%;
+    cursor: pointer;
+    border-radius: 12px;
+    margin: 0 5%;
+    transition: .3s;
+    font-size: .8em;
+}
+
+.page-link:hover {
+    background-color: rgba(151, 249, 216, 0.747);
+}
+
+.page-link.is-active {
+    background-color: rgb(151, 249, 216);
+    border-right: 3px solid #0c925f;
+    border-left: 3px solid #0c925f;
+}
+
+.page-link a {
+    padding: 7%;
+    width: 100%;
+}
+
+.page-link img {
+    margin-bottom: -5px;
+    width: 20px;
+}
+
+
+
+/* left side */
+.left-side {
+    width: 100%;
+}
+
+/* header style  */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3%;
+    align-items: center;
+    width: 100%;
+    z-index: 0;
+    box-shadow: 0 -6px 10px 5px rgba(81, 81, 81, 0.5);
+    height: 4rem;
+    background-color: rgba(239, 239, 239, 0.882);
+
+}
+
+header div {
+    cursor: pointer;
+    display: flex;
+}
+
+header img {
+    width: 25px;
+}
+
+
+
+/* tabales */
+.content {
+    padding: 8% 10%;
+    background-color: rgba(247, 247, 247, 0.74);
+}
+
+.content input {
+    border: 1px solid gray;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+thead tr {
+    background: rgb(69, 159, 120);
+}
+
+tbody tr:nth-last-child(odd) {
+    background: rgba(208, 249, 216, 0.538);
+}
+
+th,
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #4cfcad8d;
+}
+
+.search-items {
+    display: flex;
+    justify-content: space-between;
+}
+
+select,
+select option,
+.search input,
+.search-btn {
+    margin-bottom: 1em;
+    padding: .6em .8em;
+    border-radius: 8px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+.search input:focus,
+input,
+select {
+    outline: none;
+}
+
+.delete {
+    cursor: pointer;
+    color: rgb(250, 49, 49);
+}
+
+.pagination {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.pagination span {
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #0c925f;
+}
+
+
+
+/* setting */
+.main-content {
+    background-color: #ffffff;
+    width: 60%;
+    margin: 0 auto;
+    padding: 15px 0;
+    box-shadow: 0 -6px 10px 5px rgba(233, 233, 233, 0.5);
+
+}
+
+.content .banner {
+    width: 100%;
+    height: 5%px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.top-card-number {
+    width: 100%;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #0c925f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-card-number>p {
+    text-align: center;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>جداول</title>
+
+
+    <link rel="stylesheet" href="css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/re575.css" />
+    <link rel="stylesheet" href="css/re768.css" />
+    <link rel="stylesheet" href="css/re991.css" />
+    <link rel="stylesheet" href="css/re1200.css" />
+  </head>
+  <body>
+    <div class="right-side">
+      <div class="user">
+        <img src="img/download.jpg" alt="" class="img" />
+
+        <div class="user-info">
+          <p class="name">علی رضا</p>
+          <p class="job">فرانت اند دولوپر</p>
+        </div>
+      </div>
+
+      <ul class="pages-link">
+        <li class="page-link">
+          <a href="index.html">
+            <img src="img/dashboard.svg" alt="خانه" />
+            <span> خانه </span>
+          </a>
+        </li>
+        <li class="page-link is-active">
+          <a href="table.html">
+            <img src="img/table.svg" alt="جدول" />
+            <span> جداول </span>
+          </a>
+        </li>
+        <li class="page-link">
+          <a href="setting.html">
+            <img src="img/user.svg" alt="تنظیمات" />
+            <span>تنظیمات</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="left-side">
+      <header>
+        <div class="habergure">
+          <img src="img/hamburger-menu.svg" alt="" />
+          <spna> داشبرد فارسی </spna>
+        </div>
+        <div class="log-out">
+          <img src="img/logout (1).svg" alt="" />
+          <span> خروج </span>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="search-items">
+          <div class="search">
+            <input type="search" placeholder="عنوان" />
+            <button class="search-btn">جست و جو</button>
+          </div>
+          <div class="filter">
+            <select>
+              <option value="" selected>دسته بندی</option>
+              <option value="tops">tops</option>
+              <option value="laptops">laptops</option>
+              <option value="smartphones">smartphones</option>
+              <option value="womens-dresses">womens-dresses</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <td>ردیف</td>
+              <td>عنوان</td>
+              <td>قیمت</td>
+              <td>عملیات</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="pagination">
+          <span class="next">بعدی</span>
+          <span class="prev">قبلی</span>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/jquery.js"></script>
+  <script>
+
+  </script>
+  <script src="js/main.js"></script>
+</html>

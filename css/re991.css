@@ -1,0 +1,33 @@
+@media (max-width: 991.98px) {
+    .right-side {
+        right: -150px;
+        width: 90px;
+        transition: all 200ms ease;
+        text-align: center;
+    }
+    
+    .right-side .page-link span,
+    .right-side .user-info {
+        display: none;
+    }
+    .right-side.is-active .page-link span,
+    .right-side.is-active .user-info {
+        display: block;
+    }
+
+    .right-side.is-active .right-side .user-info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 10px 0;
+    }
+    .right-side.is-active {
+        background-color: rgb(255, 255, 255);
+        width: 270px;
+        height: 100vh;
+        z-index: 10;
+        transition: all 200ms ease;
+    }
+    
+    
+}
