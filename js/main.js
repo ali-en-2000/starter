@@ -11,7 +11,7 @@ $(document).ready(function () {
         url: 'https://dummyjson.com/products?limit=10&skip='+skip+'&select=title,price',
         method: "GET",
         dataType: "json",
-        success: function (res, status, jqXHR) {
+        success: function (res) {
           var row = "";
           res.products.forEach((item) => {
             row += `
