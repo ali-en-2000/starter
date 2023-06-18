@@ -172,6 +172,11 @@ td {
     border: 1px solid #ddd;
 }
 
+td img{
+    width: 30px;
+    height: 30px;
+}
+
 tbody tr:hover {
     background-color: #4cfcad8d;
 }

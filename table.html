@@ -55,17 +55,16 @@
 
       <div class="content">
         <div class="search-items">
-          <div class="search">
-            <input type="search" placeholder="عنوان" />
-            <button class="search-btn">جست و جو</button>
+          <div class="table_size">
+            <select>
+              <option value="5" selected>5</option>
+              <option value="10" >10</option>
+              <option value="20" >20</option>
+            </select>
           </div>
           <div class="filter">
             <select>
               <option value="" selected>دسته بندی</option>
-              <option value="tops">tops</option>
-              <option value="laptops">laptops</option>
-              <option value="smartphones">smartphones</option>
-              <option value="womens-dresses">womens-dresses</option>
             </select>
           </div>
         </div>
@@ -73,17 +72,16 @@
           <thead>
             <tr>
               <td>ردیف</td>
+              <td>تصویر</td>
               <td>عنوان</td>
               <td>قیمت</td>
+              <td>دسته بندی</td>
               <td>عملیات</td>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
-        <div class="pagination">
-          <span class="next">بعدی</span>
-          <span class="prev">قبلی</span>
-        </div>
+
       </div>
     </div>
   </body>
