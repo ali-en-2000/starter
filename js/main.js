@@ -126,15 +126,15 @@ $(document).on("change", ".filter select", function () {
   }
 });
 
-$('a').on('click', function(e) {
-  e.preventDefault();
-  let productID = $(this).attr('href').split('=')[1];
-  $.ajax({
-    url: `/product.html?id=${productID}`,
-    data:{id:productID}
-  }).done(function(response) { 
-    $('#content').html(response);
-  });
-});
+// $('a').on('click', function(e) {
+//   e.preventDefault();
+//   let productID = $(this).attr('href').split('=')[1];
+//   $.ajax({
+//     url: `/product.html?id=${productID}`,
+//     data:{id:productID}
+//   }).done(function(response) { 
+//     $('#content').html(response);
+//   });
+// });
 
 });
