@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/re991.css" />
+  </head>
+  <body>
+    <div class="mainscreen">
+      <div class="card">
+        <div class="leftside">
+          <img src="" class="product" alt="Shoes" />
+        </div>
+        <div class="rightside">
+          <form action="">
+            <p>Title</p>
+            <input type="text" class="inputbox" name="name" id="title" />
+            <p>Description</p>
+            <textarea
+              type="text"
+              class="inputbox"
+              name="description"
+              id="description"
+            ></textarea>
+            <p>Price($)</p>
+            <input type="number" class="inputbox" id="price" step="0.01" />
+
+            <p>Category</p>
+            <select class="inputbox" name="categories" id="categories"></select>
+            <div class="product_btns">
+              <button type="submit" class="button">save</button>
+              <a href="table.html" class="button cancel">cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="js/jquery.js"></script>
+  <script>
+    $(document).ready(function () {
+      const productId = window.location.search.split("=")[1];
+
+      $.ajax({
+        url: "https://fakestoreapi.com/products/categories",
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+          const select = $("#categories");
+          select.empty();
+          select.append(
+            $("<option>").text("--Select a Category--").attr("value", "")
+          ); // گزینه‌ی پیش‌فرض خالی
+          res.forEach((category) => {
+            select.append($("<option>").text(category).attr("value", category)); // گزینه‌ی هر دسته‌بندی
+          });
+          getProduct();
+        },
+        error: function (err) {
+          alert("مشکلی پیش امده است.");
+        },
+      });
+
+      function getProduct() {
+        $.ajax({
+          url: "https://fakestoreapi.com/products/" + productId,
+          method: "GET",
+          dataType: "json",
+          success: function (res) {
+            $(".leftside img").attr("src", res.image);
+            $("#title").val(res.title);
+            $("#description").val(res.description);
+            $("#price").val(res.price);
+            $("#categories").val(res.category);
+          },
+        });
+      }
+      
+      // const form = $("form");
+      // $(form).on("submit", (event) => {
+      //   event.preventDefault();
+
+      //   const title = $("#title");
+      //   const description = $("#description");
+      //   const price = $("#price");
+      //   const priceVal = parseFloat(price.val());
+      //   const categories = $("#categories");
+
+      //   var ErrorVal = 0;
+
+      //   if (title.val().trim() === "") {
+      //     ErrorVal++;
+      //     title.addClass("error");
+      //     title.focus();
+      //   } else title.removeClass("error");
+
+      //   if (description.val().trim() === "") {
+      //     ErrorVal++;
+      //     description.addClass("error");
+      //     description.focus();
+      //   } else description.removeClass("error");
+
+      //   if (categories.val().trim() === "") {
+      //     ErrorVal++;
+      //     categories.addClass("error");
+      //     categories.focus();
+      //   } else categories.removeClass("error");
+
+      //   if (isNaN(priceVal) || priceVal < 0) {
+      //     ErrorVal++;
+      //     price.addClass("error");
+      //     price.focus();
+      //   } else price.removeClass("error");
+
+      //   if (ErrorVal == 0) {
+      //     $.ajax({
+      //       url: "https://fakestoreapi.com/products/" + productId,
+      //       method: "PUT",
+      //       data: JSON.stringify({
+      //         title: title.val(),
+      //         price: priceVal,
+      //         description: description.val(),
+      //         category: categories.val(),
+      //       }),
+      //       success: function (res) {
+      //         alert("با موفقیت انجام شد");
+      //       },
+      //       error: function (err) {
+      //         alert("مشکلی به وجو آمده است");
+      //       },
+      //     });
+      //   }
+      // });
+    
+    });
+  </script>
+</html>

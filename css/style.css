@@ -169,13 +169,23 @@ tbody tr:nth-last-child(odd) {
 th,
 td {
     padding: 8px;
-    border: 1px solid #ddd;
 }
 
-td img{
+td img {
     width: 30px;
     height: 30px;
 }
+
+.oprations {
+    display: flex;
+    justify-content: space-between;
+}
+
+.oprations a {
+    max-width: 37px;
+    margin-top: 5px;
+}
+
 
 tbody tr:hover {
     background-color: #4cfcad8d;
@@ -187,9 +197,7 @@ tbody tr:hover {
 }
 
 select,
-select option,
-.search input,
-.search-btn {
+select option {
     margin-bottom: 1em;
     padding: .6em .8em;
     border-radius: 8px;
@@ -197,7 +205,7 @@ select option,
     cursor: pointer;
 }
 
-.search input:focus,
+
 input,
 select {
     outline: none;
@@ -205,21 +213,7 @@ select {
 
 .delete {
     cursor: pointer;
-    color: rgb(250, 49, 49);
 }
-
-.pagination {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.pagination span {
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 10px 15px;
-    background-color: #0c925f;
-}
-
 
 /* setting */
 .main-content {
@@ -228,17 +222,123 @@ select {
     margin: 0 auto;
     padding: 15px 0;
     box-shadow: 0 -6px 10px 5px rgba(233, 233, 233, 0.5);
-
 }
 
-.setting-form{
+.setting-form {
     display: flex;
     flex-direction: column;
     padding: 0 5%;
 }
 
-.setting-form>*{
+.setting-form>* {
     padding: 15px 10px;
-    border-radius: 8px ;
+    border-radius: 8px;
 
+}
+
+/* product */
+
+.mainscreen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #3f963e;
+}
+
+.card {
+    width: 70rem;
+    margin: auto;
+    background: white;
+    position: center;
+    align-self: center;
+    top: 50rem;
+    border-radius: 1.5rem;
+    box-shadow: 4px 3px 20px #3535358c;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.leftside {
+    background: #ffffff;
+    width: 25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.product {
+    object-fit: cover;
+    width: 80%;
+    height: 80%;
+}
+
+.rightside {
+    background-color: #ffffff;
+    width: 35rem;
+    border-bottom-right-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    padding: 1rem 2rem 3rem 3rem;
+}
+
+form p {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: .8rem 0;
+}
+
+form .inputbox {
+    width: 100%;
+    padding: 0.5rem;
+    border-bottom: 1.5px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    color: #615a5a;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+form .error {
+    border-color: rgba(255, 0, 0, 0.653);
+}
+
+form textarea,
+form input {
+    border: none;
+}
+
+form textarea {
+    height: 150px;
+    overflow: hidden;
+}
+
+form .product_btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+form .button {
+    background: linear-gradient(135deg, #337535 0%, #0e6105 100%);
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    width: 48%;
+    transition: .2s;
+    text-align: center;
+}
+
+form .cancel {
+    background: linear-gradient(135deg, #e91409 0%, #d51518 100%);
+}
+
+form .button:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 3px 3px 6px #38373785;
 }

@@ -1,15 +1,16 @@
-@media (max-width: 991.98px) {
+@media only screen and (max-width: 1000px) {
     .right-side {
         right: -150px;
         width: 90px;
         transition: all 200ms ease;
         text-align: center;
     }
-    
+
     .right-side .page-link span,
     .right-side .user-info {
         display: none;
     }
+
     .right-side.is-active .page-link span,
     .right-side.is-active .user-info {
         display: block;
@@ -21,6 +22,7 @@
         text-align: center;
         margin: 10px 0;
     }
+
     .right-side.is-active {
         background-color: rgb(255, 255, 255);
         width: 270px;
@@ -28,6 +30,27 @@
         z-index: 10;
         transition: all 200ms ease;
     }
-    
-    
+
+
+    /* product style */
+    .card {
+        flex-direction: column;
+        width: auto;
+
+    }
+
+    .leftside {
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0;
+        border-radius: 0;
+    }
+
+    .rightside {
+        width: auto;
+        border-bottom-left-radius: 1.5rem;
+        padding: 0.5rem 3rem 3rem 2rem;
+        border-radius: 0;
+    }
 }

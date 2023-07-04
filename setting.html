@@ -4,10 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>جداول</title>    
-    
+    <title>جداول</title>
+
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/re991.css" />
+    <style>
+      .jf-button {
+        background-color: aquamarine;
+        outline: none;
+        border: none;
+        box-shadow: 0 5px 5px rgb(213, 213, 213);
+        cursor: pointer;
+      }
+      form p{
+        color: red;
+        font-size: .8rem;
+        
+      }
+      .shadowError{
+        box-shadow: 0 7px 25px rgba(250, 93, 93, 0.689);
+      }
+      .shadowSucces{
+        box-shadow: 0 7px 25px rgba(130, 255, 102, 0.608);
+      }
+      .main-content{
+        transition: .3s;
+      }
+    </style>
   </head>
   <body>
     <div class="right-side">
@@ -55,34 +78,23 @@
 
       <div class="content">
         <div class="main-content">
-          <div class="form-max-width my-5">
-              <form action="" class="setting-form">
-                  <label class="input-help text-right margin-bottom-12" >
-                      نام‌کاربری
-                  </label>
-                  <input class="text text-left" placeholder="نام کاربری" value="user Test">  
-                  <label class="input-help text-right margin-bottom-12" >
-                      ایمیل
-                  </label>
-                  <input class="text text-left" placeholder="ایمیل" value="text@gmail.com">
-
-                  <label class="input-help text-right margin-bottom-12">
-                      رمزعبور
-                  </label>
-                  <input type="password" class="text text-left" placeholder="رمز عبور" >
-                  <label class="input-help text-right margin-bottom-12">
-                      تکرار رمزعبور
-                  </label>
-                  <input type="password" class="text text-left" placeholder="تکرار رمزعبور">
-                  
-                  <br>
-                  <button class="jf-button">ذخیره اطلاعات</button>
-                  <br>
-  
-              </form>
-          </div>
-  
-      </div>
+            <form class="setting-form">
+              <label> نام‌کاربری </label>
+              <input type="text" placeholder="نام کاربری" id="name" />
+              <label> ایمیل </label>
+              <input type="text" placeholder="ایمیل" id="email" />
+              <label> رمزعبور </label>
+              <input type="password" placeholder="رمز عبور" id="password" />
+              <label> تکرار رمزعبور </label>
+              <input
+                type="password"
+                placeholder="تکرار رمزعبور"
+                id="confirmPassword"
+              />
+              <p id="formErrors"></p>
+              <button type="submit" class="jf-button">ذخیره اطلاعات</button>
+            </form>
+        </div>
       </div>
     </div>
   </body>
