@@ -83,69 +83,6 @@
         });
       }
 
-      // SUBMIT PRODUCT CHANGE
-      const form = $("form");
-      $(form).on("submit", (event) => {
-        event.preventDefault();
-
-        const title = $("#title");
-        const description = $("#description");
-        const price = $("#price");
-        const priceVal = parseFloat(price.val());
-        const categories = $("#categories");
-
-        var ErrorVal = 0;
-
-        // TITLE VALIDATIION
-        if (title.val().trim() === "") {
-          ErrorVal++;
-          title.addClass("error");
-          title.focus();
-        } else title.removeClass("error");
-
-        // DESCRIPTION VALIDATIION
-        if (description.val().trim() === "") {
-          ErrorVal++;
-          description.addClass("error");
-          description.focus();
-        } else description.removeClass("error");
-
-        // CATEGORIES VALIDATIION
-        if (categories.val().trim() === "") {
-          ErrorVal++;
-          categories.addClass("error");
-          categories.focus();
-        } else categories.removeClass("error");
-
-        // PRICE VALIDATIION
-        if (isNaN(priceVal) || priceVal < 0) {
-          ErrorVal++;
-          price.addClass("error");
-          price.focus();
-        } else price.removeClass("error");
-
-        if (ErrorVal == 0) {
-          // SEND PRODUCT DETAILS
-          $.ajax({
-            url: "https://fakestoreapi.com/products/" + productId,
-            method: "PUT",
-            data: JSON.stringify({
-              title: title.val(),
-              price: priceVal,
-              description: description.val(),
-              category: categories.val(),
-            }),
-            success: function (res) {
-              alert("با موفقیت انجام شد");
-              window.location = "/table.html";
-
-            },
-            error: function (err) {
-              alert("مشکلی به وجو آمده است");
-            },
-          });
-        }
-      });
     });
   </script>
 </html>
