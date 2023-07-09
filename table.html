@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/re991.css" />
   </head>
   <body>
-
+    <!-- START SIDEBAR  -->
     <div class="right-side">
       <div class="user">
         <img src="img/download.jpg" alt="" class="img" />
@@ -42,6 +42,8 @@
         </li>
       </ul>
     </div>
+    <!-- END SIDEBAR  -->
+
     <div class="left-side">
       <header>
         <div class="habergure">
@@ -55,12 +57,13 @@
       </header>
 
       <div class="content">
+        <!-- START TABLE FILTERS -->
         <div class="search-items">
           <div class="table_size">
             <select>
               <option value="5" selected>5</option>
-              <option value="10" >10</option>
-              <option value="20" >20</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
             </select>
           </div>
           <div class="filter">
@@ -69,6 +72,9 @@
             </select>
           </div>
         </div>
+        <!-- END TABLE FILTERS -->
+
+        <!-- START TABLE  -->
         <table>
           <thead>
             <tr>
@@ -82,12 +88,137 @@
           </thead>
           <tbody></tbody>
         </table>
-
+        <!-- END TABLE  -->
       </div>
-
-  </div>
-
+    </div>
   </body>
   <script src="js/jquery.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    $(document).ready(function () {
+      // GET CATEGORIES
+      $.ajax({
+        url: "https://fakestoreapi.com/products/categories",
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+          res.forEach((item) => {
+            $(".filter select").append(
+              $("<option>").text(item).attr("value", item)
+            );
+          });
+        },
+        error: function (err) {
+          alert("مشکلی به وجو آمده است");
+        },
+      });
+
+      // GET DATA TABLE
+      var size = 5;
+      function getData(size) {
+        $.ajax({
+          url: "https://fakestoreapi.com/products?limit=" + size,
+          method: "GET",
+          dataType: "json",
+          success: function (res) {
+            var row = "";
+            var recordNumber = 1;
+            res.forEach((item) => {
+              row += `
+                  <tr>
+                    <td>${recordNumber}</td>
+                    <td><img src="${item.image}" class="product_img" alt="${item.title}"></td>
+                    <td>${item.title}</td>
+                    <td>${item.price} هزار تومان</td>
+                    <td>${item.category}</td>
+                    <td class="oprations">
+                      <a href="/product.html?id=${item.id}"><img src="../img/edit.svg" alt="show"/></a>
+                      <img src="../img/trash.svg" alt="delete" class='delete' id='${item.id}'/>
+                    </td>
+                  </tr>
+                  `;
+
+              recordNumber += 1;
+            });
+
+            $(".content").find("tbody").html(row);
+          },
+          error: function (err) {
+            alert("مشکلی به وجو آمده است");
+          },
+        });
+      }
+      getData(size);
+
+      // RESIZE TABLE
+      $(document).on("change", ".table_size select", function () {
+        var tableSize = $(this).val();
+        if (tableSize) {
+          getData(tableSize);
+        } else {
+          getData(5);
+        }
+      });
+
+      // DELETE ITEM FROM TABLE
+      $(document).on("click", ".delete", function () {
+        if (confirm("آیا از حذف مطمئن هستید؟")) {
+          var id = $(this).attr("id");
+          $.ajax({
+            url: "https://fakestoreapi.com/products/" + id,
+            method: "DELETE",
+            success: function (res, status) {
+              if (status == "success") {
+                alert("با موفقیت حذف شد");
+              } else {
+                alert("حذف نشد");
+              }
+            },
+            error: function (err) {
+              alert("مشکلی به وجو آمده است");
+            },
+          });
+        }
+      });
+
+      // FITER TABLE BY CATEGORIES
+      $(document).on("change", ".filter select", function () {
+        var filterValue = $(this).val();
+        if (filterValue) {
+          $.ajax({
+            url: "https://fakestoreapi.com/products/category/" + filterValue,
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+              var row = "";
+              var recordNumber = 1;
+
+              res.forEach((item) => {
+                row += `
+                    <tr>
+                      <td>${recordNumber}</td>
+                      <td><img src="${item.image}" class="product_img" alt="${item.title}"></td>
+                      <td>${item.title}</td>
+                      <td>${item.price} هزار تومان</td>
+                      <td>${item.category}</td>
+                      <td class="oprations">
+                        <a href="/product.html?id=${item.id}"><img src="../img/edit.svg" alt="show"/></a>
+                        <img src="../img/trash.svg" alt="delete" class='delete' id='${item.id}'/>
+                      </td>
+                    </tr>
+                    `;
+                recordNumber += 1;
+              });
+              $(".content").find("tbody").html(row);
+            },
+            error: function (err) {
+              alert("مشکلی به وجو آمده است");
+            },
+          });
+        } else {
+          getData(0);
+        }
+      });
+    });
+  </script>
 </html>

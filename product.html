@@ -12,9 +12,10 @@
     <div class="mainscreen">
       <div class="card">
         <div class="leftside">
-          <img src="" class="product" alt="Shoes" />
+          <img src="" class="product" alt="Product" />
         </div>
         <div class="rightside">
+          <!-- START PRODUCT DETAILS -->
           <form action="">
             <p>Title</p>
             <input type="text" class="inputbox" name="name" id="title" />
@@ -35,6 +36,7 @@
               <a href="table.html" class="button cancel">cancel</a>
             </div>
           </form>
+          <!-- END PRODUCT DETAILS -->
         </div>
       </div>
     </div>
@@ -44,6 +46,7 @@
     $(document).ready(function () {
       const productId = window.location.search.split("=")[1];
 
+      // GET CATEGORIES
       $.ajax({
         url: "https://fakestoreapi.com/products/categories",
         method: "GET",
@@ -53,9 +56,9 @@
           select.empty();
           select.append(
             $("<option>").text("--Select a Category--").attr("value", "")
-          ); // گزینه‌ی پیش‌فرض خالی
+          ); // SET DEFAULT OPTIONS
           res.forEach((category) => {
-            select.append($("<option>").text(category).attr("value", category)); // گزینه‌ی هر دسته‌بندی
+            select.append($("<option>").text(category).attr("value", category));
           });
           getProduct();
         },
@@ -64,6 +67,7 @@
         },
       });
 
+      // GET PRODUCT BY ID
       function getProduct() {
         $.ajax({
           url: "https://fakestoreapi.com/products/" + productId,
@@ -78,7 +82,7 @@
           },
         });
       }
-     
+
     });
   </script>
 </html>
