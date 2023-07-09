@@ -66,6 +66,94 @@
     </div>
 
     <script src="js/jquery.js"></script>
-  
+    <script>
+      $(document).ready(function () {
+        // SUBMIT LOGIN FORM
+        $(".setting-form").submit(function (e) {
+          e.preventDefault();
+
+          const email = $("#email");
+          const password = $("#password");
+          const confirmPassword = $("#confirmPassword");
+          var errorCount = 0,
+            errorContent = "";
+
+          // EMAIL VALIDATION
+          if (email.val().trim() === "") {
+            email.addClass("error");
+            errorContent += "<p>فیلد ایمیل را پر کنید</p>";
+            errorCount++;
+          } else if (!validateEmail(email.val())) {
+            email.addClass("error");
+            errorContent += "<p>فیلد ایمیل به درستی وارد نشده است</p>";
+            errorCount++;
+          } else {
+            email.removeClass("error");
+          }
+
+          // PASSWORD VALIDATION
+          if (password.val().trim() === "") {
+            password.addClass("error");
+            errorContent += "<p>فیلد رمز عبور را پر کنید</p>";
+            errorCount++;
+          } else {
+            password.removeClass("error");
+          }
+
+          // CONFIRM PASSWORD VALIDATION
+          if (confirmPassword.val().trim() === "") {
+            confirmPassword.addClass("error");
+            errorContent += "<p>فیلد تکرار رمز عبور را پر کنید</p>";
+            errorCount++;
+          } else if (confirmPassword.val().trim() !== password.val().trim()) {
+            confirmPassword.addClass("error");
+            errorContent += "<p>عدم تطابق پسورد</p>";
+            errorCount++;
+          } else {
+            confirmPassword.removeClass("error");
+          }
+
+          // SHOW ERRORS
+          $("#formErrors").html(errorContent);
+
+          if (errorCount === 0) {
+            // SEND LOGIN FORM
+            $.ajax({
+              url: "https://api.storerestapi.com/auth/login",
+              type: "POST",
+              data: JSON.stringify({
+                email: email.val(),
+                password: password.val(),
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+              success: function (response) {
+                $(".main-content").addClass("shadowSucces");
+                $(".main-content").removeClass("shadowError");
+                localStorage.setItem("token", response.data.access_token);
+                setTimeout(() => {
+                  window.location = "/index.html";
+                }, 200);
+              },
+              error: function (responce) {
+                alert("مشکلی رخ داده است.");
+                $(".main-content").addClass("shadowError");
+                $(".main-content").removeClass("shadowSucces");
+              },
+            });
+          } else {
+            $(".main-content").addClass("shadowError");
+            $(".main-content").removeClass("shadowSucces");
+          }
+        });
+
+        // EMAIL VALIDATION
+        function validateEmail(email) {
+          const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+          return regex.test(email);
+        }
+      });
+    </script>
   </body>
 </html>
