@@ -4,70 +4,149 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/re991.css" />
-
     <style>
-      .jf-button {
-        background-color: aquamarine;
-        outline: none;
-        border: none;
-        box-shadow: 0 5px 5px rgb(213, 213, 213);
-        cursor: pointer;
-      }
-      form p {
-        color: red;
-        font-size: 0.8rem;
-        direction: rtl;
-      }
-      .shadowError {
-        box-shadow: 0 7px 25px rgba(250, 93, 93, 0.689);
-      }
-      .shadowSucces {
-        box-shadow: 0 7px 25px rgba(130, 255, 102, 0.608);
-      }
-      .main-content {
-        transition: 0.3s;
-      }
-      h1{
-        text-align: center;
+      /* ---- particles.js container ---- */
+      #particles-js {
+        width: 100%;
+        height: 100%;
+        background-color: #767374;
+        background-image: url("");
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
       }
     </style>
   </head>
   <body>
-    <div class="left-side">
-      <div class="content">
-        <div class="main-content">
-          <h1>login</h1>
-          <form class="setting-form">
-            <label> ایمیل </label>
-            <input
-              type="text"
-              placeholder="ایمیل"
-              id="email"
-              value="marklyan@gmail.com"
-            />
-            <label> رمزعبور </label>
-            <input
-              type="password"
-              placeholder="رمز عبور"
-              id="password"
-              value="simple_password"
-            />
-            <label> تکرار رمزعبور </label>
-            <input
-              type="password"
-              placeholder="تکرار رمزعبور"
-              id="confirmPassword"
-              value="simple_password"
-            />
-            <p id="formErrors"></p>
-            <button type="submit" class="jf-button">ذخیره اطلاعات</button>
-          </form>
-        </div>
+    <div id="particles-js">
+      <div class="login-form">
+        <h1>login</h1>
+        <form>
+          <label> ایمیل </label>
+          <input
+            type="text"
+            placeholder="ایمیل"
+            id="email"
+            value="marklyan@gmail.com"
+          />
+          <label> رمزعبور </label>
+          <input
+            type="password"
+            placeholder="رمز عبور"
+            id="password"
+            value="simple_password"
+          />
+          <label> تکرار رمزعبور </label>
+          <input
+            type="password"
+            placeholder="تکرار رمزعبور"
+            id="confirmPassword"
+            value="simple_password"
+          />
+          <p id="formErrors"></p>
+          <button type="submit" class="jf-button">ذخیره اطلاعات</button>
+        </form>
       </div>
     </div>
 
     <script src="js/jquery.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // SUBMIT LOGIN FORM
+        $(".setting-form").submit(function (e) {
+          e.preventDefault();
+
+          const email = $("#email");
+          const password = $("#password");
+          const confirmPassword = $("#confirmPassword");
+          var errorCount = 0,
+            errorContent = "";
+
+          // EMAIL VALIDATION
+          if (email.val().trim() === "") {
+            email.addClass("error");
+            errorContent += "<p>فیلد ایمیل را پر کنید</p>";
+            errorCount++;
+          } else if (!validateEmail(email.val())) {
+            email.addClass("error");
+            errorContent += "<p>فیلد ایمیل به درستی وارد نشده است</p>";
+            errorCount++;
+          } else {
+            email.removeClass("error");
+          }
+
+          // PASSWORD VALIDATION
+          if (password.val().trim() === "") {
+            password.addClass("error");
+            errorContent += "<p>فیلد رمز عبور را پر کنید</p>";
+            errorCount++;
+          } else {
+            password.removeClass("error");
+          }
+
+          // CONFIRM PASSWORD VALIDATION
+          if (confirmPassword.val().trim() === "") {
+            confirmPassword.addClass("error");
+            errorContent += "<p>فیلد تکرار رمز عبور را پر کنید</p>";
+            errorCount++;
+          } else if (confirmPassword.val().trim() !== password.val().trim()) {
+            confirmPassword.addClass("error");
+            errorContent += "<p>عدم تطابق پسورد</p>";
+            errorCount++;
+          } else {
+            confirmPassword.removeClass("error");
+          }
+
+          // SHOW ERRORS
+          $("#formErrors").html(errorContent);
+
+          if (errorCount === 0) {
+            // SEND LOGIN FORM
+            $.ajax({
+              url: "https://api.storerestapi.com/auth/login",
+              type: "POST",
+              data: JSON.stringify({
+                email: email.val(),
+                password: password.val(),
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+              success: function (response) {
+                $(".main-content").addClass("shadowSucces");
+                $(".main-content").removeClass("shadowError");
+                localStorage.setItem("token", response.data.access_token);
+                setTimeout(() => {
+                  window.location = "/index.html";
+                }, 200);
+              },
+              error: function (responce) {
+                alert("مشکلی رخ داده است.");
+                $(".main-content").addClass("shadowError");
+                $(".main-content").removeClass("shadowSucces");
+              },
+            });
+          } else {
+            $(".main-content").addClass("shadowError");
+            $(".main-content").removeClass("shadowSucces");
+          }
+        });
+
+        // EMAIL VALIDATION
+        function validateEmail(email) {
+          const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+          return regex.test(email);
+        }
+      });
+    </script>
+
+    <!-- 1: file link -->
+    <!-- <script src="js/plugings/particles.js"></script> -->
+    <!-- 2: CDN link -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
+    <!-- <script src="js/plugings/config.js"></script> -->
   </body>
 </html>
