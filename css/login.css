@@ -31,12 +31,7 @@ input{
     font-size: 0.8rem;
     direction: rtl;
   }
-  .shadowError {
-    box-shadow: 0 7px 25px rgba(250, 93, 93, 0.689);
-  }
-  .shadowSucces {
-    box-shadow: 0 7px 25px rgba(130, 255, 102, 0.608);
-  }
+
   .main-content {
     transition: 0.3s;
   }
